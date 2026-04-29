@@ -628,17 +628,42 @@
       const STORAGE_KEY = "little-dudes-v2";
       const state = loadState();
       const moodMessages = {
-        calm: "Calm mode: nice. Slow brain, strong brain.",
-        bouncy: "Bouncy mode: we can use that energy for a quest.",
-        mad: "Mad mode: fair. Let’s hit the reset button and get some power back.",
-        worried: "Worried mode: that’s okay. Tiny steps count.",
-        awesome: "Awesome mode: you are absolutely cooking today."
+        calm: [
+          "Calm mode: nice. Slow brain, strong brain.",
+          "Calm mode is a power-up. Nice and steady.",
+          "Calm brain. Ready body. Good start."
+        ],
+        bouncy: [
+          "Bouncy mode: we can use that energy for a quest.",
+          "Bouncy mode is okay. Let's point that zoom at something fun.",
+          "Big energy today. That can help us win quests."
+        ],
+        mad: [
+          "Mad mode: fair. Let’s hit the reset button and get some power back.",
+          "Mad happens. Tiny steps still count.",
+          "That mad feeling is real. We can still do one good thing next."
+        ],
+        worried: [
+          "Worried mode: that’s okay. Tiny steps count.",
+          "Worried is okay. One small win can help.",
+          "A worried brain still gets credit for trying."
+        ],
+        awesome: [
+          "Awesome mode: you are absolutely cooking today.",
+          "Awesome mode is on. Let’s use it.",
+          "You have that ready-to-roll feeling today."
+        ]
       };
       const questMessages = [
         "You just unlocked serious kid power.",
         "Tiny mission complete. Big legend energy.",
         "That was a champion move.",
-        "One step at a time. Still counts."
+        "One step at a time. Still counts.",
+        "That one totally counts.",
+        "Strong work, little dude.",
+        "Boom. Another quest win.",
+        "You did the thing. Nice job.",
+        "That was sneaky-good work."
       ];
 
       const pointsEl = document.getElementById("points");
@@ -681,45 +706,73 @@
           desc: "Spin a kid-safe movement like step-ups, squats, pushups, or jumping jacks."
         }
       ];
-      const mathQuestionBanks = [
-        [
-          { prompt: "2 x 5", answer: 10 },
-          { prompt: "10 - 3", answer: 7 },
-          { prompt: "5 + 7", answer: 12 },
-          { prompt: "3 x 2", answer: 6 },
-          { prompt: "8 + 4", answer: 12 }
-        ],
-        [
-          { prompt: "5 x 2", answer: 10 },
-          { prompt: "14 - 6", answer: 8 },
-          { prompt: "6 + 6", answer: 12 },
-          { prompt: "2 x 10", answer: 20 },
-          { prompt: "9 - 4", answer: 5 }
-        ],
-        [
-          { prompt: "3 x 5", answer: 15 },
-          { prompt: "7 + 8", answer: 15 },
-          { prompt: "12 - 5", answer: 7 },
-          { prompt: "4 x 2", answer: 8 },
-          { prompt: "10 + 3", answer: 13 }
-        ]
+      const mathQuestionPool = [
+        { prompt: "2 x 5", answer: 10 },
+        { prompt: "5 x 2", answer: 10 },
+        { prompt: "3 x 2", answer: 6 },
+        { prompt: "4 x 2", answer: 8 },
+        { prompt: "2 x 10", answer: 20 },
+        { prompt: "5 x 5", answer: 25 },
+        { prompt: "3 x 5", answer: 15 },
+        { prompt: "10 - 3", answer: 7 },
+        { prompt: "14 - 6", answer: 8 },
+        { prompt: "12 - 5", answer: 7 },
+        { prompt: "11 - 4", answer: 7 },
+        { prompt: "15 - 7", answer: 8 },
+        { prompt: "16 - 9", answer: 7 },
+        { prompt: "18 - 9", answer: 9 },
+        { prompt: "20 - 10", answer: 10 },
+        { prompt: "5 + 7", answer: 12 },
+        { prompt: "8 + 4", answer: 12 },
+        { prompt: "6 + 6", answer: 12 },
+        { prompt: "7 + 8", answer: 15 },
+        { prompt: "10 + 3", answer: 13 },
+        { prompt: "9 + 5", answer: 14 },
+        { prompt: "4 + 9", answer: 13 },
+        { prompt: "3 + 8", answer: 11 },
+        { prompt: "6 + 7", answer: 13 },
+        { prompt: "10 + 7", answer: 17 },
+        { prompt: "9 - 4", answer: 5 },
+        { prompt: "13 - 6", answer: 7 },
+        { prompt: "17 - 8", answer: 9 },
+        { prompt: "15 - 6", answer: 9 },
+        { prompt: "19 - 10", answer: 9 },
+        { prompt: "10 + 10", answer: 20 },
+        { prompt: "2 + 9", answer: 11 },
+        { prompt: "7 + 3", answer: 10 },
+        { prompt: "6 + 5", answer: 11 },
+        { prompt: "4 + 8", answer: 12 },
+        { prompt: "5 + 5", answer: 10 }
       ];
-      const readingSentenceBanks = [
-        [
-          "I like hockey.",
-          "The bat is ready.",
-          "I skate with power."
-        ],
-        [
-          "The puck moves fast.",
-          "I throw the ball far.",
-          "My glove is open."
-        ],
-        [
-          "I watch the game.",
-          "The pitcher is ready.",
-          "I score a goal."
-        ]
+      const readingSentencePool = [
+        "I like hockey.",
+        "The bat is ready.",
+        "I skate with power.",
+        "The puck moves fast.",
+        "I throw the ball far.",
+        "My glove is open.",
+        "I watch the game.",
+        "The pitcher is ready.",
+        "I score a goal.",
+        "I hit the ball.",
+        "My stick is strong.",
+        "I run to first.",
+        "The goalie is ready.",
+        "I catch the ball.",
+        "My team plays hard.",
+        "I pass the puck.",
+        "The ball goes up.",
+        "I swing and smile.",
+        "My skates go fast.",
+        "I stop the puck.",
+        "The coach says go.",
+        "I toss the ball.",
+        "We cheer so loud.",
+        "I love game day.",
+        "The crowd claps big.",
+        "I bend my knees.",
+        "My eyes find the ball.",
+        "I tap the puck."
       ];
       const sportExerciseBanks = [
         {
@@ -727,7 +780,6 @@
           goal: "20 seconds each leg",
           tip: "Use one stair or a sturdy step.",
           seconds: 40,
-          icon: "🪜",
           steps: [
             "Stand in front of the step.",
             "Step up with one foot, then the other.",
@@ -739,7 +791,6 @@
           goal: "20 seconds",
           tip: "Feet shoulder-width apart, like sitting in a chair.",
           seconds: 20,
-          icon: "🪑",
           steps: [
             "Stand with feet apart.",
             "Sit back like a tiny chair.",
@@ -751,7 +802,6 @@
           goal: "15 seconds",
           tip: "Hands on a wall, body straight.",
           seconds: 15,
-          icon: "🧱",
           steps: [
             "Put hands on a wall.",
             "Bend elbows and lean in.",
@@ -763,7 +813,6 @@
           goal: "20 seconds",
           tip: "Fast but controlled, like a pogo superhero.",
           seconds: 20,
-          icon: "⭐",
           steps: [
             "Jump feet out and arms up.",
             "Jump feet in and arms down.",
@@ -775,7 +824,6 @@
           goal: "20 seconds",
           tip: "Knees up, arms swinging.",
           seconds: 20,
-          icon: "🥾",
           steps: [
             "Stand tall.",
             "Lift one knee, then the other.",
@@ -787,13 +835,112 @@
           goal: "10 seconds",
           tip: "Tiny steps on hands and feet.",
           seconds: 10,
-          icon: "🐻",
           steps: [
             "Put hands and feet on the floor.",
             "Walk like a bear for a few steps.",
             "Keep it slow and small."
           ]
+        },
+        {
+          name: "Fast feet",
+          goal: "15 seconds",
+          tip: "Tiny quick steps like a speedy player.",
+          seconds: 15,
+          steps: [
+            "Stand tall with bent knees.",
+            "Move your feet super fast in place.",
+            "Keep your chest up the whole time."
+          ]
+        },
+        {
+          name: "High knees",
+          goal: "15 seconds",
+          tip: "Drive your knees up like a runner.",
+          seconds: 15,
+          steps: [
+            "Stand tall.",
+            "Lift one knee high, then the other.",
+            "Pump your arms as you go."
+          ]
+        },
+        {
+          name: "Side shuffles",
+          goal: "20 seconds",
+          tip: "Stay low and slide side to side.",
+          seconds: 20,
+          steps: [
+            "Bend your knees a little.",
+            "Step right-right, then left-left.",
+            "Keep your feet moving and chest up."
+          ]
+        },
+        {
+          name: "Crab hold",
+          goal: "10 seconds",
+          tip: "Tummy up like a strong crab table.",
+          seconds: 10,
+          steps: [
+            "Sit down and place hands behind you.",
+            "Lift your hips up.",
+            "Hold still like a crab."
+          ]
+        },
+        {
+          name: "Toe touches",
+          goal: "15 seconds",
+          tip: "Slow and stretchy.",
+          seconds: 15,
+          steps: [
+            "Stand tall.",
+            "Reach toward your toes.",
+            "Stand back up and do it again."
+          ]
+        },
+        {
+          name: "Star jumps",
+          goal: "12 seconds",
+          tip: "Jump big, land soft.",
+          seconds: 12,
+          steps: [
+            "Start small with knees bent.",
+            "Jump wide like a star.",
+            "Land softly and reset."
+          ]
+        },
+        {
+          name: "Lunges",
+          goal: "20 seconds",
+          tip: "Take small steps and keep balance.",
+          seconds: 20,
+          steps: [
+            "Step one foot forward.",
+            "Bend both knees a little.",
+            "Push back and switch legs."
+          ]
+        },
+        {
+          name: "Arm circles",
+          goal: "15 seconds",
+          tip: "Make big smooth circles.",
+          seconds: 15,
+          steps: [
+            "Stretch arms out to the sides.",
+            "Make small circles, then bigger ones.",
+            "Switch and go backward too."
+          ]
         }
+      ];
+      const bonusQuestOptions = [
+        "Do 10 jumping jacks like a hockey robot.",
+        "Read one page with silly voices.",
+        "Practice 5 quick math facts.",
+        "Name 3 feelings and pick the one that fits.",
+        "Skate in place or do 20 seconds of fast feet.",
+        "Pretend you just scored the winning goal.",
+        "Do your best baseball announcer voice.",
+        "Hop five times and freeze like a statue.",
+        "Clap a silly rhythm and copy it back.",
+        "Do one super slow dragon breath."
       ];
       let pendingMathFocus = false;
       let readingRecognition = null;
@@ -979,14 +1126,21 @@
         window.requestAnimationFrame(() => input.focus());
       }
 
+      function chooseItems(pool, count) {
+        const shuffled = [...pool].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, count);
+      }
+
+      function randomFrom(list) {
+        return list[Math.floor(Math.random() * list.length)];
+      }
+
       function chooseMathQuestions() {
-        const bank = mathQuestionBanks[Math.floor(Math.random() * mathQuestionBanks.length)];
-        return [...bank].sort(() => Math.random() - 0.5);
+        return chooseItems(mathQuestionPool, 5);
       }
 
       function chooseReadingSentences() {
-        const bank = readingSentenceBanks[Math.floor(Math.random() * readingSentenceBanks.length)];
-        return [...bank];
+        return chooseItems(readingSentencePool, 3);
       }
 
       function chooseSportExercise() {
@@ -1811,19 +1965,12 @@
         state.mood = button.dataset.mood;
         saveState();
         updateUI();
-        motdEl.textContent = moodMessages[state.mood] || "Nice.";
+        motdEl.textContent = randomFrom(moodMessages[state.mood] || ["Nice."]);
         setStatus(`Mood set to ${button.textContent.trim()}.`);
       });
 
       document.getElementById("randomQuest").addEventListener("click", () => {
-        const options = [
-          "Do 10 jumping jacks like a hockey robot.",
-          "Read one page with silly voices.",
-          "Practice 5 quick math facts.",
-          "Name 3 feelings and pick the one that fits.",
-          "Skate in place or do 20 seconds of fast feet."
-        ];
-        const pick = options[Math.floor(Math.random() * options.length)];
+        const pick = randomFrom(bonusQuestOptions);
         motdEl.textContent = pick;
         setStatus("Bonus quest chosen.");
         confettiBurst();
